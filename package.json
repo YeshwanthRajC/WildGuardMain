@@ -10,12 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.1",
     "@tailwindcss/vite": "^4.3.3",
     "axios": "^1.19.0",
     "clsx": "^2.1.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "framer-motion": "^13.0.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.29.0",
+    "morgan": "^1.11.0",
+    "mqtt": "^5.15.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-leaflet": "^5.0.0",
