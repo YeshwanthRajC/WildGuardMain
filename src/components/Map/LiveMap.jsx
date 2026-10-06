@@ -107,7 +107,7 @@ const LiveMap = ({ hotspots = [], conflictCases = [], onMapClick, onEditClick, o
             icon={customIcon}
           >
             <Popup className="custom-popup">
-              <div className="p-2 min-w-[200px]">
+              <div className="p-2 min-w-50">
                 <h3 className="font-semibold text-lg text-gray-800 mb-2 border-b pb-2">Hotspot Details</h3>
                 
                 <div className="mb-3">
@@ -159,7 +159,7 @@ const LiveMap = ({ hotspots = [], conflictCases = [], onMapClick, onEditClick, o
             icon={conflictIcon}
           >
             <Popup className="custom-popup">
-              <div className="p-2 min-w-[220px]">
+              <div className="p-2 min-w-55">
                 <div className="flex justify-between items-start mb-2 border-b pb-2">
                   <h3 className="font-semibold text-lg text-gray-800">Conflict Case</h3>
                   <span className={`text-xs px-2 py-1 rounded-full font-bold ${getThreatColor(conflict.threat_level)}`}>

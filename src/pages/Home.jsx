@@ -3,7 +3,7 @@ import LiveMap from '../components/Map/LiveMap';
 import EditHotspotDialog from '../components/Hotspot/EditHotspotDialog';
 import EditConflictDialog from '../components/Conflict/EditConflictDialog';
 import { hotspotService, conflictCaseService } from '../services/api';
-import { Plus, AlertTriangle, Loader2 } from 'lucide-react';
+import { Plus, AlertTriangle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Home = () => {
@@ -143,11 +143,6 @@ const Home = () => {
 
   return (
     <div className="w-full h-full relative">
-      {loading && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/50 backdrop-blur-sm">
-          <Loader2 className="w-10 h-10 animate-spin text-green-500" />
-        </div>
-      )}
 
       {/* Map Component */}
       <LiveMap 
@@ -161,7 +156,7 @@ const Home = () => {
       />
 
       {/* Hotspot Panel - Floating UI */}
-      <div className="absolute top-6 right-6 z-[1000] flex flex-col space-y-4 items-end">
+      <div className="absolute top-6 right-6 z-1000 flex flex-col space-y-4 items-end">
         
         {/* Hotspot Button */}
         <div className="relative">
@@ -185,10 +180,10 @@ const Home = () => {
           <AnimatePresence>
             {isAddMode && (
                <motion.div 
-                 initial={{ opacity: 0, y: -10 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 exit={{ opacity: 0, y: -10 }}
-                 className="absolute top-14 right-0 bg-white px-4 py-3 rounded-xl shadow-lg border border-green-100 text-sm text-gray-700 w-48 text-center"
+                 initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                 animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
+                 exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                 className="overflow-hidden bg-white px-4 py-3 rounded-xl shadow-lg border border-green-100 text-sm text-gray-700 w-48 text-center ml-auto"
                >
                  Click on the map to place a green hotspot marker.
                </motion.div>
@@ -218,10 +213,10 @@ const Home = () => {
           <AnimatePresence>
             {isAddConflictMode && (
                <motion.div 
-                 initial={{ opacity: 0, y: -10 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 exit={{ opacity: 0, y: -10 }}
-                 className="absolute top-14 right-0 bg-white px-4 py-3 rounded-xl shadow-lg border border-red-100 text-sm text-gray-700 w-48 text-center"
+                 initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                 animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
+                 exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                 className="overflow-hidden bg-white px-4 py-3 rounded-xl shadow-lg border border-red-100 text-sm text-gray-700 w-48 text-center ml-auto"
                >
                  Click on the map to place a red conflict marker.
                </motion.div>

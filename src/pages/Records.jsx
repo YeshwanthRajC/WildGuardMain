@@ -2,7 +2,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { conflictCaseService, manualRecordService } from '../services/api';
 import ManualRecordDialog from '../components/Records/ManualRecordDialog';
 import EditConflictDialog from '../components/Conflict/EditConflictDialog';
-import { Plus, Search, Filter, Loader2, FileText, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Plus, Search, Filter, FileText, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react';
+import PageHeader from '../components/ui/PageHeader';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const getThreatColor = (level) => {
   switch (level) {
@@ -180,34 +186,28 @@ const Records = () => {
   return (
     <div className="h-full p-8 flex flex-col bg-gray-50 overflow-hidden">
       
-      {/* Header section */}
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center space-x-3">
-            <FileText className="w-8 h-8 text-blue-600" />
-            <span>Records Management</span>
-          </h1>
-          <p className="text-gray-500 mt-2 text-sm">View and manage all recorded wildlife conflicts and incidents.</p>
-        </div>
-        <button
-          onClick={handleAddClick}
-          className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-lg shadow-blue-200 transition-all"
-        >
-          <Plus className="w-5 h-5" />
-          <span>Add Record</span>
-        </button>
-      </div>
+      <PageHeader
+        icon={FileText}
+        title="Records Management"
+        description="View and manage all recorded wildlife conflicts and incidents."
+        stats={[{ label: 'Total records', value: records.length }]}
+      >
+        <Button onClick={handleAddClick} className="bg-white text-emerald-900 hover:bg-emerald-50">
+          <Plus className="w-4 h-4" />
+          Add Record
+        </Button>
+      </PageHeader>
 
       {/* Controls: Search and Filter */}
       <div className="flex space-x-4 mb-6">
         <div className="relative flex-1 max-w-md">
           <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-          <input 
-            type="text" 
+          <Input
+            type="text"
             placeholder="Search by location, description, or type..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm"
+            className="h-10 rounded-xl bg-white pl-10 shadow-sm"
           />
         </div>
         <div className="relative">
@@ -225,10 +225,12 @@ const Records = () => {
       </div>
 
       {/* Table Container */}
-      <div className="flex-1 bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+      <Card className="flex-1 gap-0 overflow-hidden rounded-2xl p-0 shadow-sm">
         {loading ? (
-          <div className="flex-1 flex items-center justify-center">
-            <Loader2 className="w-10 h-10 animate-spin text-blue-500" />
+          <div className="flex-1 space-y-3 p-6">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <Skeleton key={i} className="h-12 w-full rounded-lg" />
+            ))}
           </div>
         ) : filteredAndSortedRecords.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center text-gray-500">
@@ -283,14 +285,14 @@ const Records = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${getThreatColor(record.threat_level)}`}>
+                        <Badge className={`font-bold ${getThreatColor(record.threat_level)}`}>
                           {record.threat_level}
-                        </span>
+                        </Badge>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${record.source === 'Map' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'}`}>
+                        <Badge variant="outline" className={record.source === 'Map' ? 'border-red-200 bg-red-50 text-red-700' : 'border-blue-200 bg-blue-50 text-blue-700'}>
                           {record.source}
-                        </span>
+                        </Badge>
                       </td>
                     </tr>
                   ))}
@@ -322,7 +324,7 @@ const Records = () => {
             </div>
           </>
         )}
-      </div>
+      </Card>
 
       <ManualRecordDialog
         isOpen={dialogOpen}

@@ -41,7 +41,7 @@ const EditHotspotDialog = ({ isOpen, onClose, onSubmit, onDelete, initialData })
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[2000] flex items-center justify-center">
+      <div className="fixed inset-0 z-2000 flex items-center justify-center">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -93,7 +93,7 @@ const EditHotspotDialog = ({ isOpen, onClose, onSubmit, onDelete, initialData })
               </div>
             </form>
 
-            <div className="bg-gray-50 rounded-xl border border-gray-100 p-4 min-h-[120px]">
+            <div className="bg-gray-50 rounded-xl border border-gray-100 p-4 min-h-30">
               {animals.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
                   {animals.map((animal, idx) => (

@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { edgeDeviceService } from '../services/api';
 import EditDeviceDialog from '../components/Devices/EditDeviceDialog';
-import { Plus, Search, Loader2, HardDrive, AlertTriangle, ChevronLeft, ChevronRight, CheckCircle, Clock } from 'lucide-react';
+import { Plus, Search, HardDrive, ChevronLeft, ChevronRight, CheckCircle, Clock } from 'lucide-react';
+import PageHeader from '../components/ui/PageHeader';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const getStatusBadge = (status) => {
   if (status === 'Online' || status === 'Serviced') return 'bg-green-100 text-green-800';
@@ -107,43 +113,42 @@ const EdgeDevices = () => {
   return (
     <div className="h-full p-8 flex flex-col bg-gray-50 overflow-hidden">
       
-      {/* Header section */}
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center space-x-3">
-            <HardDrive className="w-8 h-8 text-slate-800" />
-            <span>Edge Devices</span>
-          </h1>
-          <p className="text-gray-500 mt-2 text-sm">Manage Edge AI nodes, MQTT configurations, and maintenance schedules.</p>
-        </div>
-        <button
-          onClick={handleAddClick}
-          className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-900 text-white px-5 py-2.5 rounded-xl font-medium shadow-lg shadow-slate-200 transition-all"
-        >
-          <Plus className="w-5 h-5" />
-          <span>Register Device</span>
-        </button>
-      </div>
+      <PageHeader
+        icon={HardDrive}
+        title="Edge Devices"
+        description="Manage Edge AI nodes, MQTT configurations, and maintenance schedules."
+        stats={[
+          { label: 'Total devices', value: devices.length },
+          { label: 'Online', value: devices.filter((d) => d.status === 'Online').length },
+        ]}
+      >
+        <Button onClick={handleAddClick} className="bg-white text-emerald-900 hover:bg-emerald-50">
+          <Plus className="w-4 h-4" />
+          Register Device
+        </Button>
+      </PageHeader>
 
       {/* Controls */}
       <div className="flex mb-6">
         <div className="relative flex-1 max-w-md">
           <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-          <input 
-            type="text" 
+          <Input
+            type="text"
             placeholder="Search by device name, location, or topic..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-slate-500 focus:border-slate-500 outline-none transition-all shadow-sm"
+            className="h-10 rounded-xl bg-white pl-10 shadow-sm"
           />
         </div>
       </div>
 
       {/* Table Container */}
-      <div className="flex-1 bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+      <Card className="flex-1 gap-0 overflow-hidden rounded-2xl p-0 shadow-sm">
         {loading ? (
-          <div className="flex-1 flex items-center justify-center">
-            <Loader2 className="w-10 h-10 animate-spin text-slate-500" />
+          <div className="flex-1 space-y-3 p-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-14 w-full rounded-lg" />
+            ))}
           </div>
         ) : filteredDevices.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center text-gray-500">
@@ -175,7 +180,7 @@ const EdgeDevices = () => {
                       >
                         <td className="px-6 py-4">
                           <p className="font-semibold text-gray-900">{device.device_name}</p>
-                          <p className="text-xs text-gray-400 truncate max-w-[150px] mt-1" title={device.id}>{device.id}</p>
+                          <p className="text-xs text-gray-400 truncate max-w-37.5 mt-1" title={device.id}>{device.id}</p>
                         </td>
                         <td className="px-6 py-4 text-gray-600">
                           {device.location}
@@ -186,7 +191,7 @@ const EdgeDevices = () => {
                           </p>
                           <p className="text-xs text-gray-500 mt-2 flex items-center">
                             <span className="font-semibold mr-1">Topic:</span>
-                            <span className="truncate max-w-[200px]" title={device.mqtt_topic}>{device.mqtt_topic}</span>
+                            <span className="truncate max-w-50" title={device.mqtt_topic}>{device.mqtt_topic}</span>
                           </p>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -202,9 +207,9 @@ const EdgeDevices = () => {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusBadge(device.status)}`}>
+                          <Badge className={`font-bold ${getStatusBadge(device.status)}`}>
                             {device.status}
-                          </span>
+                          </Badge>
                         </td>
                       </tr>
                     );
@@ -237,7 +242,7 @@ const EdgeDevices = () => {
             </div>
           </>
         )}
-      </div>
+      </Card>
 
       <EditDeviceDialog
         isOpen={dialogOpen}

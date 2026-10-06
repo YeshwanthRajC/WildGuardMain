@@ -7,6 +7,8 @@ import conflictCaseRoutes from './routes/conflictCases.js';
 import manualRecordRoutes from './routes/manualRecords.js';
 import edgeDeviceRoutes from './routes/edgeDevices.js';
 import notificationRoutes from './routes/notifications.js';
+import newsRoutes from './routes/news.js';
+import contactRoutes from './routes/contacts.js';
 import { initMQTT } from './services/mqttService.js';
 
 dotenv.config();
@@ -25,6 +27,8 @@ app.use('/api/conflict-cases', conflictCaseRoutes);
 app.use('/api/manual-records', manualRecordRoutes);
 app.use('/api/edge-devices', edgeDeviceRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/news', newsRoutes);
+app.use('/api/contacts', contactRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Elephant Intrusion Alert System API is running.' });
