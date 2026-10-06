@@ -1,6 +1,6 @@
 # 🐘 WildGuard
 
-**WildGuard** is an AI-powered human-wildlife conflict monitoring and early warning system. I built this platform to tackle a problem that hits very close to home: the escalating conflict between human communities and wild elephants in India. 
+**WildGuard** is an human-wildlife conflict monitoring and early warning system. I built this platform to tackle a problem that hits very close to home: the escalating conflict between human communities and wild elephants in India. 
 
 Every year, surprise encounters between people and elephants lead to tragic losses of life, devastated crop yields, and retaliatory harm against endangered wildlife. The fundamental issue isn't malice—it's a lack of awareness and timely communication. People wander into the paths of migrating herds, and herds wander into unprotected farmlands simply because neither knows the other is there until it's too late.
 
