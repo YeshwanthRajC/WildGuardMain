@@ -307,10 +307,8 @@ const MainLayout = () => {
           </div>
         </header>
 
-        <div className="flex-1 relative overflow-y-auto overflow-x-hidden p-6 md:p-8">
-          <div className="mx-auto max-w-7xl h-full">
-            <Outlet />
-          </div>
+        <div className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col">
+          <Outlet />
         </div>
       </main>
 

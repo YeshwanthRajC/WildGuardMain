@@ -197,7 +197,7 @@ const Landing = () => {
             to="/dashboard"
             className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-slate-900/20 transition-all hover:bg-emerald-600 hover:shadow-emerald-600/30 hover:-translate-y-0.5"
           >
-            Launch System <ArrowRight className="h-4 w-4" />
+            Launch Dashboard <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </header>
@@ -205,8 +205,8 @@ const Landing = () => {
       {/* Hero Section */}
       <section id="top" className="relative flex min-h-svh items-center justify-center overflow-hidden bg-slate-950">
         <motion.div style={{ y: heroY, opacity }} className="absolute inset-0 w-full h-full">
-          <img src={heroImage} alt="Elephant in forest" className="absolute inset-0 h-full w-full object-cover opacity-40 mix-blend-overlay" />
-          <div className="absolute inset-0 bg-linear-to-b from-slate-950/40 via-emerald-950/60 to-slate-950/90" />
+          <img src={heroImage} alt="Elephant in forest" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+          <div className="absolute inset-0 bg-linear-to-b from-slate-950/70 via-emerald-950/40 to-slate-950/95" />
         </motion.div>
         
         {/* Abstract Glowing Orbs */}
@@ -237,14 +237,14 @@ const Landing = () => {
           </motion.p>
           <motion.div variants={fadeUp} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             <Link to="/dashboard" className="group relative inline-flex items-center gap-3 rounded-full bg-emerald-500 px-8 py-4 text-lg font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:scale-105 shadow-[0_0_40px_rgba(16,185,129,0.4)]">
-              Enter Command Center 
+              Enter Dashboard 
               <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
         </motion.div>
         
         {/* Bottom Fade out */}
-        <div className="absolute bottom-0 inset-x-0 h-48 bg-linear-to-t from-slate-50 to-transparent"></div>
+        <div className="absolute bottom-0 inset-x-0 h-16 bg-linear-to-t from-slate-50 to-transparent"></div>
       </section>
 
       {/* Mission Section */}
@@ -344,7 +344,7 @@ const Landing = () => {
           <h2 className="text-4xl font-black text-white sm:text-6xl tracking-tight mb-8">Ready to secure the perimeter?</h2>
           <p className="text-xl text-emerald-100 mb-12 max-w-2xl mx-auto leading-relaxed">Join the network of forest officials utilizing advanced AI edge monitoring to save lives and protect wildlife across the country.</p>
           <Link to="/dashboard" className="inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 text-lg font-bold text-emerald-950 shadow-2xl transition-all hover:scale-105 hover:bg-emerald-50 hover:shadow-white/20">
-            Launch Command Center <ArrowRight className="h-6 w-6" />
+            Launch Dashboard <ArrowRight className="h-6 w-6" />
           </Link>
         </div>
       </section>

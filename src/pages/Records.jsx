@@ -184,7 +184,7 @@ const Records = () => {
   const uniqueCaseTypes = ['All', ...new Set(records.map(r => r.case_type))];
 
   return (
-    <div className="h-full p-8 flex flex-col bg-gray-50 overflow-hidden">
+    <div className="h-full w-full max-w-7xl mx-auto p-4 sm:p-8 flex flex-col overflow-hidden">
       
       <PageHeader
         icon={FileText}
@@ -225,7 +225,7 @@ const Records = () => {
       </div>
 
       {/* Table Container */}
-      <Card className="flex-1 gap-0 overflow-hidden rounded-2xl p-0 shadow-sm">
+      <Card className="flex-1 gap-0 overflow-hidden rounded-2xl p-0 shadow-sm flex flex-col min-h-0">
         {loading ? (
           <div className="flex-1 space-y-3 p-6">
             {Array.from({ length: 8 }).map((_, i) => (
@@ -240,7 +240,7 @@ const Records = () => {
           </div>
         ) : (
           <>
-            <div className="overflow-x-auto">
+            <div className="overflow-auto flex-1">
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-gray-50 border-b border-gray-200 text-gray-600 text-sm font-semibold uppercase tracking-wider">

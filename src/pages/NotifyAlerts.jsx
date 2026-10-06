@@ -3,12 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Send, CheckCircle2, MapPin } from 'lucide-react';
 import { contactService } from '../services/api';
 
-const predefinedTemplates = [
-  "🚨 WILDLIFE ALERT: Leopard sighted near your area. Please stay indoors and secure livestock.",
-  "🐘 WILDLIFE ALERT: Elephant herd crossing the main road. Drive carefully and avoid the area.",
-  "⚠️ WARNING: Forest department is conducting patrols today. Please avoid entering the restricted forest zones.",
-  "ℹ️ INFO: A recently conflicted animal has been safely relocated from your vicinity. The area is now safe."
-];
+
 
 const NotifyAlerts = () => {
   const [groups, setGroups] = useState([]);
@@ -16,7 +11,7 @@ const NotifyAlerts = () => {
 
   // State for sending SMS
   const [selectedGroupId, setSelectedGroupId] = useState('');
-  const [selectedTemplate, setSelectedTemplate] = useState(predefinedTemplates[0]);
+  const [customMessage, setCustomMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
@@ -37,7 +32,7 @@ const NotifyAlerts = () => {
   };
 
   const handleSendSMS = () => {
-    if (!selectedGroupId || !selectedTemplate) return;
+    if (!selectedGroupId || !customMessage.trim()) return;
     setIsSending(true);
     
     // Simulate network delay
@@ -95,18 +90,16 @@ const NotifyAlerts = () => {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Select Message Template</label>
-            <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
-              {predefinedTemplates.map((template, idx) => (
-                <div 
-                  key={idx}
-                  onClick={() => setSelectedTemplate(template)}
-                  className={`p-4 rounded-xl border text-sm cursor-pointer transition-all ${selectedTemplate === template ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'}`}
-                >
-                  {template}
-                </div>
-              ))}
-            </div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Message Content</label>
+            <textarea
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none transition-all shadow-sm"
+              rows={4}
+              placeholder="Type your alert message here..."
+              value={customMessage}
+              onChange={(e) => setCustomMessage(e.target.value)}
+              disabled={loading || isSending}
+            ></textarea>
+            <p className="text-xs text-gray-500 mt-2 text-right">{customMessage.length} characters</p>
           </div>
 
           <div className="pt-6 mt-auto">
